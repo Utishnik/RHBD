@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "*.floppascript": "code-text-binary",
+        "hesheng.h": "c",
+        "stdlib.h": "c",
+        "function.h": "c"
+    }
+}

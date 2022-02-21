@@ -1,17 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int str_len(char str[])
+#define Size 10
+
+void print_arr(int *arr,int size)
 {
-	int len=0;
-
-	for(int i=0;*(str+i)!='\0';i++,len++);
-
-	return len;
+	int *p=arr+size;
+	for(;arr<p;arr++)
+		printf("%d ",*(arr));
 }
 
 int main(void)
 {
-	char *str="bl";
-	printf("%d\n",str_len(str));
+	int arr[Size]={1,2,3,4,0,6,7,8,9,10};
+	print_arr(arr,Size);
 }
