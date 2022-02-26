@@ -1,17 +1,15 @@
 #include <stdio.h>
-#include <stdlib.h>
+int main(void){
+    int *ptr;
 
-#define Size 10
+    {
+        // New scope
+        int tmp[5]={1,2,3,4,5};
+        ptr = tmp; // Just to see if the memory is cleared
+    }
 
-void print_arr(int *arr,int size)
-{
-	int *p=arr+size;
-	for(;arr<p;arr++)
-		printf("%d ",*(arr));
-}
+    //printf("tmp = %d", tmp); // Compile-time error (as expected)
+    printf("ptr = %d\n", *ptr);
 
-int main(void)
-{
-	int arr[Size]={1,2,3,4,0,6,7,8,9,10};
-	print_arr(arr,Size);
+    return 0;
 }
