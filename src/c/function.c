@@ -6,8 +6,8 @@
 //додоелать хеш функцию
 //+
 
-#define PDCFH//PrintDebugCodeFunctionHesh
-#define bin_dec_log
+//#define PDCFH//PrintDebugCodeFunctionHesh
+//#define bin_dec_log
 
 char wancoding(long long value)
 {
@@ -36,11 +36,7 @@ void bin_dec(unsigned char inarr[],unsigned char *outarr,int lenstr,int lencol){
 		unsigned char res=0;
 		for(int j=0;j<lencol;j++){
 			res+=massive[-1+((((lencol)*(lenstr))-(lencol*i+j)))]*digree(2,j);
-			printf("%d ",massive[-1+(((lencol)*(lenstr))-(lencol*i+j))]*digree(2,j));
-			//printf("%d ",-1+(((lencol)*(lenstr))-(lencol*i+j)));
-			//текст следуйщий строки выводится перевернутым - исправить
 		}
-		printf("\n");
 		dec[i]=res;
 	}
 
@@ -85,25 +81,28 @@ int dec_binary(long long value,unsigned char arr[],long long len)
 	return lenn;
 }
 
-void FunctionHesheng(char *str,char *StrOut,int size)
+int FunctionHesheng(char *str,char *StrOut,int size)
 {
 	#ifdef PDCFH
 		printf("\n==============\n");
 	#endif
 		long long Dec_result_sum_polynomials=0; 
 		int j=0;
-		char Alfawit[15];
-		for(int i=65;i<=79;i++,j++)
+		char Alfawit[16];
+		for(int i=65;i<=80;i++,j++)
 			Alfawit[j]=i;
 		char text[size];
 		long long result[size];
 		for(int i=0;i<size;i++)
-			text[i]=(int)*(str+i);
+			text[i]=(char)*(str+i);
 		int endvalue=text[size-1];
 		j=0;
 		for(int i=0;i<size;i++)
 		{
-			result[i]=text[i]*(digree(endvalue,j));
+			result[i]=text[i]*endvalue*j/*(digree(endvalue,j))*/;
+			#ifdef ca
+				printf("text-%d endvalue-%d\n",text[i],endvalue);
+			#endif
 			/*
 			printf(" j-%d\n",j);
 			printf(" text %d\n",((int)text[i]));
@@ -148,6 +147,7 @@ void FunctionHesheng(char *str,char *StrOut,int size)
 			B2[i]=B21[i];
 
 	unsigned char BinSymbolsArr[len1/4][4];
+	unsigned char BinSymbolsArrO[len1];//BinSymbolsARR тот же массив но двух мерный массив в виде одномерного
 
 	int z=0;
 
@@ -157,6 +157,30 @@ void FunctionHesheng(char *str,char *StrOut,int size)
 		z++;
 		}
 	}
+	for(int i=0;i<(len1/4);i++){
+		for(int j=0;j<4;j++){
+			BinSymbolsArrO[4*i+j]=BinSymbolsArr[i][j];
+		}
+	}
+	#ifdef PDCFH
+		printf("\n\nPrint BinSymbolsARRO\n\n\n");
+		for(int i=0;i<len1/4;i++){
+			for(int j=0;j<4;j++){
+				printf("%d ",BinSymbolsArrO[4*i+j]);
+			}
+			printf("\n");
+		}
+	#endif
+
+	unsigned char DecBinSymbolsArrO[len1/4];
+	bin_dec(BinSymbolsArrO,DecBinSymbolsArrO,(len1/4),4);
+
+	#ifdef PDCFH
+		printf("\n\n");
+		for(int i=0;i<(len1/4);i++)
+			printf("%d ",DecBinSymbolsArrO[i]);
+		printf("\n\n");
+	#endif
 
 
 	#ifdef PDCFH
@@ -169,6 +193,7 @@ void FunctionHesheng(char *str,char *StrOut,int size)
 	}
 	printf("\n=====================================================\n");
 	#endif
+	
 		                                       
 
 	#ifdef PDCFH
@@ -217,4 +242,26 @@ void FunctionHesheng(char *str,char *StrOut,int size)
 		printf("\n");
 	#endif
 
+
+	char hesh[len1/4];
+
+	for(int i=0;i<(len1/4);i++){
+		hesh[i]=Alfawit[DecBinSymbolsArrO[i]];
+	}
+	for(int i=0;i<(len1/4);i++){
+		StrOut[i]=hesh[i];
+	}
+
+	#ifdef PDCFH
+		printf("Text:\n");
+		for(int i=0;i<size;i++)
+			printf("%c",*(str+i));
+
+		printf("\nPrint Hesh:\n");
+		for(int i=0;i<(len1/4);i++){
+			printf("%c",hesh[i]);
+		}
+	#endif
+
+	return (len1/4);
 }
