@@ -8,3 +8,4 @@ long long digree(int value,int indicator);
 void bin_dec(unsigned char inarr[],unsigned char *outarr,int lenstr,int lencol);
 
 #endif
+

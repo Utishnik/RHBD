@@ -16,7 +16,6 @@ char wancoding(long long value)
 
 //формула для работы с матрицой в виде ряда чисел C*y-C+x начиная с нуля C*y+x
 
-
 long long digree(int value,int indicator);
 
 void bin_dec(unsigned char inarr[],unsigned char *outarr,int lenstr,int lencol){
@@ -36,12 +35,13 @@ void bin_dec(unsigned char inarr[],unsigned char *outarr,int lenstr,int lencol){
 	for(int i=0;i<lenstr;i++){
 		unsigned char res=0;
 		for(int j=0;j<lencol;j++){
-			res+=digree(massive[((lencol*lenstr)-(lencol*i+j))-1],j);
-
-			printf("%d ",massive[((lencol*lenstr)-(lencol*i+j))-1]);
+			res+=massive[-1+((((lencol)*(lenstr))-(lencol*i+j)))]*digree(2,j);
+			printf("%d ",massive[-1+(((lencol)*(lenstr))-(lencol*i+j))]*digree(2,j));
+			//printf("%d ",-1+(((lencol)*(lenstr))-(lencol*i+j)));
+			//текст следуйщий строки выводится перевернутым - исправить
 		}
-		dec[i]=res;
 		printf("\n");
+		dec[i]=res;
 	}
 
 	for(int i=0;i<lenstr;i++)
